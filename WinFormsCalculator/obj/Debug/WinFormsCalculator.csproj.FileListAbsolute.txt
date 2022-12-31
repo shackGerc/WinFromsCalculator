@@ -1,0 +1,11 @@
+C:\Users\fabio\OneDrive\Escritorio\WinFormsCalculator\WinFormsCalculator\bin\Debug\WinFormsCalculator.exe.config
+C:\Users\fabio\OneDrive\Escritorio\WinFormsCalculator\WinFormsCalculator\bin\Debug\WinFormsCalculator.exe
+C:\Users\fabio\OneDrive\Escritorio\WinFormsCalculator\WinFormsCalculator\bin\Debug\WinFormsCalculator.pdb
+C:\Users\fabio\OneDrive\Escritorio\WinFormsCalculator\WinFormsCalculator\obj\Debug\WinFormsCalculator.csproj.AssemblyReference.cache
+C:\Users\fabio\OneDrive\Escritorio\WinFormsCalculator\WinFormsCalculator\obj\Debug\WinFormsCalculator.csproj.SuggestedBindingRedirects.cache
+C:\Users\fabio\OneDrive\Escritorio\WinFormsCalculator\WinFormsCalculator\obj\Debug\WinFormsCalculator.MainForm.resources
+C:\Users\fabio\OneDrive\Escritorio\WinFormsCalculator\WinFormsCalculator\obj\Debug\WinFormsCalculator.Properties.Resources.resources
+C:\Users\fabio\OneDrive\Escritorio\WinFormsCalculator\WinFormsCalculator\obj\Debug\WinFormsCalculator.csproj.GenerateResource.cache
+C:\Users\fabio\OneDrive\Escritorio\WinFormsCalculator\WinFormsCalculator\obj\Debug\WinFormsCalculator.csproj.CoreCompileInputs.cache
+C:\Users\fabio\OneDrive\Escritorio\WinFormsCalculator\WinFormsCalculator\obj\Debug\WinFormsCalculator.exe
+C:\Users\fabio\OneDrive\Escritorio\WinFormsCalculator\WinFormsCalculator\obj\Debug\WinFormsCalculator.pdb
