@@ -12,10 +12,11 @@ namespace WinFormsCalculator
 {
     public partial class MainForm : Form
     {
-        string currentCalculation;
+        int expressionLenght;
         char lastDigit, inputDigit;
+        string currentCalculation;
         bool thereIsANegativeNumber, thereIsAnOpenParentheses, equalsButtonWasPressed;
-        
+
         public MainForm()
         {
             InitializeComponent();
@@ -62,18 +63,6 @@ namespace WinFormsCalculator
                 = buttonOpenBracket.Size = buttonCloseBracket.Size = buttonC.Size = buttonCE.Size = new Size(width, height);
         }
 
-        /// <returns>
-        ///        Returns true if the last calculator input is a number and false if it's not.
-        /// </returns>
-        private bool IsLastDigitANumber()
-        {
-            bool isANumber = false;
-            if (txtExpression.Text.Length > 0)
-                if (char.IsNumber(txtExpression.Text[txtExpression.Text.Length-1]))
-                    isANumber = true;
-            return isANumber;
-        }
-
         private void MainForm_Load(object sender, EventArgs e)
         {
             SetScreen();
@@ -87,9 +76,10 @@ namespace WinFormsCalculator
                 equalsButtonWasPressed = false;
             }
 
+            expressionLenght = txtExpression.Text.Length;
             inputDigit = Convert.ToChar((sender as Button).Text);
 
-            if (txtExpression.Text.Length > 0)
+            if (expressionLenght > 0)
                 lastDigit = txtExpression.Text[txtExpression.Text.Length-1];
 
             // ¿Is the input digit a number?
@@ -98,18 +88,47 @@ namespace WinFormsCalculator
                 // It's added as long as there is no parenthesis before it
                 if (lastDigit != ')')
                 {
-                    currentCalculation += inputDigit;
+                    if (char.IsNumber(lastDigit) || expressionLenght == 0 || thereIsANegativeNumber ||
+                        lastDigit == '.')
+                    {
+                        thereIsANegativeNumber = false;
+                        currentCalculation += inputDigit;
+                    }
+                    else
+                        currentCalculation += " " + inputDigit;
+                    
                     txtExpression.Text = currentCalculation;
                 }
             }
             else
             {
-                // The minus symbol it's added always, there are not condition for it
                 if (inputDigit == '-')
                 {
-                    currentCalculation += inputDigit;
-                    txtExpression.Text = currentCalculation;
+                    // Minus symbol is added as long as there is no another minus before it
+                    if (lastDigit != '-')
+                    {
+                        // If there is no number or a closing parentheses before the minus sing entry, it means that this
+                        // minus symbol is being used to signal a negativa number
+                        if (!char.IsNumber(lastDigit) && lastDigit != ')')
+                        {
+                            thereIsANegativeNumber = true;
+                        }
+
+                        if (expressionLenght == 0)
+                            currentCalculation += inputDigit;
+                        else
+                            currentCalculation += " " + inputDigit;
+
+                        txtExpression.Text = currentCalculation;
+                    }
                 }
+
+                if(inputDigit == '.')
+                    if(char.IsNumber(lastDigit))
+                    {
+                        currentCalculation += inputDigit;
+                        txtExpression.Text = currentCalculation;
+                    }
 
                 // ¿Is the input digit an open parenthesis?
                 if (inputDigit == '(')
@@ -117,7 +136,7 @@ namespace WinFormsCalculator
                     // It is added as long as there is no number before it
                     if (!char.IsNumber(lastDigit))
                     {
-                        currentCalculation += inputDigit;
+                        currentCalculation += " " + inputDigit ;
                         txtExpression.Text = currentCalculation;
                         thereIsAnOpenParentheses = true;
                     }
@@ -128,18 +147,21 @@ namespace WinFormsCalculator
                     // It is added as long as there is an unclosed parenthesis before it
                     if (thereIsAnOpenParentheses)
                     {
-                        currentCalculation += inputDigit;
+                        currentCalculation += " " + inputDigit;
                         txtExpression.Text = currentCalculation;
                         thereIsAnOpenParentheses = false;
                     }
                 }
-                // Then, if the input digit is an operator (+, -, x or /)
+                // Then, if the input digit is an operator (+, x or /)
                 else
                     if (char.IsNumber(lastDigit) || lastDigit == ')')
-                {
-                    currentCalculation += inputDigit;
-                    txtExpression.Text = currentCalculation;
-                }
+                    {
+                        if (inputDigit != '-' && inputDigit != '.')
+                        {
+                            currentCalculation += " " + inputDigit;
+                            txtExpression.Text = currentCalculation;
+                        }
+                    }
             }
         }
 
@@ -149,21 +171,26 @@ namespace WinFormsCalculator
 
             try
             {
-                txtResult.Text = new DataTable().Compute(formattedCalculation, null).ToString();
-                currentCalculation += txtResult.Text;
-                txtExpression.Text += "=";
-                lastDigit = '=';
-                equalsButtonWasPressed = true;
+                if (txtExpression.Text.Length > 0)
+                {
+                    txtResult.Text = Calculator.ComputeInfixedExpression(formattedCalculation).ToString();
+                    currentCalculation += txtResult.Text;
+                    txtExpression.Text += "=";
+                    lastDigit = '=';
+                    equalsButtonWasPressed = true;
+                }
             }
-            catch (Exception)
+            catch (Exception except)
             {
-                txtExpression.Text = "0";
+                MessageBox.Show(except.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtExpression.Text = "";
                 currentCalculation = "";
             }
         }
 
         private void clear_Button_Click(object sender, EventArgs e)
         {
+            lastDigit = inputDigit = ' ';
             currentCalculation = "";
             txtExpression.Text = "";
             txtResult.Text = "";
@@ -173,7 +200,14 @@ namespace WinFormsCalculator
         {
             if (currentCalculation.Length > 0 && lastDigit != '=')
             {
-                currentCalculation = currentCalculation.Remove(currentCalculation.Length - 1, 1);
+                lastDigit = inputDigit = ' ';
+                expressionLenght = txtExpression.Text.Length;
+
+                if(expressionLenght == 1)
+                    currentCalculation = currentCalculation.Remove(currentCalculation.Length - 1, 1);
+                else
+                    currentCalculation = currentCalculation.Remove(currentCalculation.Length - 2, 2);
+
                 txtExpression.Text = currentCalculation;
             }
         }
