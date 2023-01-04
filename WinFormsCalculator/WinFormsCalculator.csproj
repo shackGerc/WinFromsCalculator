@@ -80,5 +80,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UserExceptions\UserExceptions.csproj">
+      <Project>{e872d0e9-401f-45ee-b95d-5136b1557597}</Project>
+      <Name>UserExceptions</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

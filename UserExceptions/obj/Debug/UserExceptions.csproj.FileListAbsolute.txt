@@ -1,0 +1,6 @@
+C:\Users\fabio\Repositorios\WinFormsCalculator\UserExceptions\bin\Debug\UserExceptions.dll
+C:\Users\fabio\Repositorios\WinFormsCalculator\UserExceptions\bin\Debug\UserExceptions.pdb
+C:\Users\fabio\Repositorios\WinFormsCalculator\UserExceptions\obj\Debug\UserExceptions.csproj.AssemblyReference.cache
+C:\Users\fabio\Repositorios\WinFormsCalculator\UserExceptions\obj\Debug\UserExceptions.csproj.CoreCompileInputs.cache
+C:\Users\fabio\Repositorios\WinFormsCalculator\UserExceptions\obj\Debug\UserExceptions.dll
+C:\Users\fabio\Repositorios\WinFormsCalculator\UserExceptions\obj\Debug\UserExceptions.pdb

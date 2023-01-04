@@ -26,6 +26,11 @@ namespace WinFormsCalculator
             currentCalculation = "";
         }
 
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            SetScreen();
+        }
+
         private void SetScreen()
         {
             // frmMain width is a 18% of the primary screen
@@ -63,11 +68,6 @@ namespace WinFormsCalculator
                 = buttonOpenBracket.Size = buttonCloseBracket.Size = buttonC.Size = buttonCE.Size = new Size(width, height);
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            SetScreen();
-        }
-
         private void button_Click(object sender, EventArgs e)
         {
             if (equalsButtonWasPressed)
@@ -80,7 +80,7 @@ namespace WinFormsCalculator
             inputDigit = Convert.ToChar((sender as Button).Text);
 
             if (expressionLenght > 0)
-                lastDigit = txtExpression.Text[txtExpression.Text.Length-1];
+                lastDigit = TakeLastInput();
 
             // ¿Is the input digit a number?
             if (char.IsNumber(inputDigit))
@@ -168,6 +168,7 @@ namespace WinFormsCalculator
         private void equals_Button_Click(object sender, EventArgs e)
         {
             string formattedCalculation = currentCalculation.Replace("x", "*");
+            formattedCalculation = formattedCalculation.Replace(".", ",");
 
             try
             {
@@ -200,16 +201,27 @@ namespace WinFormsCalculator
         {
             if (currentCalculation.Length > 0 && lastDigit != '=')
             {
-                lastDigit = inputDigit = ' ';
-                expressionLenght = txtExpression.Text.Length;
+                    lastDigit = TakeLastInput();
 
-                if(expressionLenght == 1)
+                if (expressionLenght > 2 && currentCalculation[currentCalculation.Length - 2] == '.')
                     currentCalculation = currentCalculation.Remove(currentCalculation.Length - 1, 1);
+
+                else if (expressionLenght == 1 || lastDigit == '.')
+                    currentCalculation = currentCalculation.Remove(currentCalculation.Length - 1, 1);
+
                 else
                     currentCalculation = currentCalculation.Remove(currentCalculation.Length - 2, 2);
 
                 txtExpression.Text = currentCalculation;
             }
+        }
+
+        private char TakeLastInput()
+        {
+            char lastInput = '\0';
+            if (expressionLenght > 0)
+                lastInput = txtExpression.Text[txtExpression.Text.Length-1];
+            return lastInput;
         }
     }
 }

@@ -20,3 +20,6 @@ C:\Users\fabio\Repositorios\WinFormsCalculator\WinFormsCalculator\obj\Debug\WinF
 C:\Users\fabio\Repositorios\WinFormsCalculator\WinFormsCalculator\obj\Debug\WinFormsCalculator.csproj.CoreCompileInputs.cache
 C:\Users\fabio\Repositorios\WinFormsCalculator\WinFormsCalculator\obj\Debug\WinFormsCalculator.exe
 C:\Users\fabio\Repositorios\WinFormsCalculator\WinFormsCalculator\obj\Debug\WinFormsCalculator.pdb
+C:\Users\fabio\Repositorios\WinFormsCalculator\WinFormsCalculator\bin\Debug\UserExceptions.dll
+C:\Users\fabio\Repositorios\WinFormsCalculator\WinFormsCalculator\bin\Debug\UserExceptions.pdb
+C:\Users\fabio\Repositorios\WinFormsCalculator\WinFormsCalculator\obj\Debug\WinFormsCalculator.csproj.CopyComplete
